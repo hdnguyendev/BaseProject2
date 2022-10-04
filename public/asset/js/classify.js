@@ -91,7 +91,7 @@ function renderToBox(list){
                         console.log(movieInfo['name']);
                         const elm =`    
                         <div
-                        class="parent transform hover:scale-105 transition-all duration-500 movie-preview w-1/2 my-4 px-2 relative h-64 md:w-1/4 md:h-48">
+                        class="parent transform hover:scale-105 transition-all duration-500 movie-preview w-full my-4 px-2 relative h-64 md:w-1/4 md:h-48">
                         <img class="w-full h-full"
                             src="${movieInfo['poster_url'] || `${window.location.origin}/asset/img/back-gr-login.jpg`}"
                             alt="">

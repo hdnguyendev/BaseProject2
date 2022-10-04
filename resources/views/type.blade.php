@@ -31,7 +31,7 @@
 @endsection
 
 @section('root')
-<div id="box" class="flex flex-wrap px-20 my-4 mt-20">
+<div id="box" class="flex flex-wrap px-8 lg:px-20 my-4 mt-20">
 
 </div>
 <div class="btn-primary ml-20" id="load-more">Load More</div>
