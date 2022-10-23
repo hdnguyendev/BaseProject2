@@ -130,7 +130,7 @@ function renderToBox(list){
                         <div class="absolute top-1/2 transform -translate-y-1/2 pl-2 left-4 text-white">
                             <h2 class="h-6">${movieInfo['name']}</h2>
                             <h4>${movieInfo['time']}</h4>
-                            <a href='./movie_detail/${movieInfo['slug']}' class="btn-primary mt-4">
+                            <a href='/detail/${movieInfo['slug']}' class="btn-primary mt-4">
                                 <span class="block mr-2">
                                     <i class="fa-solid fa-play"></i>
                                 </span>

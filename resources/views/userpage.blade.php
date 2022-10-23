@@ -9,7 +9,7 @@
         <div class="mt-20">
         <div class="user-wrapper text-white">
             <div id="user"  class="min-h-screen">
-                <div id="user-info" class="h-1/3 flex flex-col items-center justify-center" style="background-image: url(asset/img/back-gr-login.jpg);">
+                <div id="user-info" class="h-56 flex flex-col items-center justify-center" style="background-image: url(asset/img/back-gr-login.jpg);">
                     <div class="user-img-wrapper rounded-full w-20 h-20w-20 p-1 border-red-500 border-solid border-4">
                         <img src="./asset/img/avt.jpeg" alt="" class=" rounded-full w-full">
                         <div class="change-img">

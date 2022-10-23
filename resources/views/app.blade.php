@@ -31,54 +31,6 @@
             </div>
             <div class="w-full">
                 <div id="feature-movies" class="slick-slider-horizontal">
-                    <div class="parent transform hover:scale-105 transition-all duration-500 movie-preview w-1/2 px-2 relative h-64 md:w-1/4 md:h-48">
-                                        <img class="w-full h-full"
-                                            src="${movieInfo['poster_url'] || './asset/img/back-gr-login.jpg'}"
-                                            alt="">
-                                        <div class="child-overlay relative">
-                                            <div class="ver-bar"></div>
-                    
-                                            <div class="side-action flex-col justify-around absolute right-4 top-1/2 -translate-y-1/2">
-                                                <div class="circle-action relative">
-                                                    <i class="fa-solid fa-share-nodes"></i>
-                                                    <div
-                                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                    
-                                                    </div>
-                                                </div>
-                                                <div class="circle-action relative">
-                                                    <i class="fa-solid fa-heart"></i>
-                                                    <div
-                                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                    
-                                                    </div>
-                                                </div>
-                                                <div class="circle-action relative">
-                                                    <i class="fa-solid fa-add"></i>
-                                                    <div
-                                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                    
-                                                    </div>
-                                                </div>
-                    
-                                            </div>
-                                        </div>
-                                        <div class="absolute top-1/2 transform -translate-y-1/2 pl-2 left-4">
-                                            <h2>${movieInfo['name']}</h2>
-                                            <h4>${movieInfo['time']}</h4>
-                                            <a href='' class="btn-primary mt-4">
-                                                <span class="block mr-2">
-                                                    <i class="fa-solid fa-play"></i>
-                                                </span>
-                                                Play now
-                                            </a>
-                                        </div>
-                    
-                                    </div>
                 </div>
             </div>
         </div>
@@ -94,7 +46,7 @@
         <!-- Coming soon movies -->
         <div class="px-8 lg:px-20 py-4 text-white max-w-full overflow-hidden">
             <div class="relative max-h-fit max-w-full">
-                <div id="top-movie-banner" class="max-w-full container hidden md:block">
+                <div id="top-movie-banner" class="max-w-full max-h-screen container hidden md:block">
 
                 </div>
                 <div

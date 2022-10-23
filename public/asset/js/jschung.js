@@ -51,6 +51,22 @@ $('#login').click(()=>{
     })
     $('#login-direct').toggleClass('hidden')
 })
+
+$('#user-auth').click(()=>{
+    $('.user-action').click(e=>{
+        e.stopPropagation();
+    })
+    $('.user-action').toggleClass('hidden')
+})
+$(document).mouseup(function(e) 
+{
+    var container = $(".user-action");
+    var contain = $('#user-auth');
+    if ((!container.is(e.target) && container.has(e.target).length === 0) &&(!contain.is(e.target) && contain.has(e.target).length === 0) ) 
+    {
+        container.addClass('hidden');
+    }
+});
 $(document).mouseup(function(e) 
 {
     var container = $("#login-direct");

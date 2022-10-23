@@ -12,26 +12,11 @@
 </head>
 
 <body>
-    <!-- <div class="loader-wrapper">
+    <div class="loader-wrapper">
         <div  class="loader bg-color-main">
-            <img src="./asset/img/loader.gif" alt="" class="w-96">
+            <img src="{{asset('asset/img/loader.gif')}}" alt="" class="w-96">
         </div>
-    </div> -->
-    <!-- Header -->
-    <!-- 
-        z-50
-        h-20
-        flex justify-between items-center
-        px-20 py-4 bg-black
-        bg-gradient-to-r
-        from-black
-        bg-opacity-0 
-        backdrop-blur-sm
-        fixed
-        top-0
-        left-0
-        right-0
-     -->
+    </div>
     <header class="
         z-50
         h-20
@@ -105,6 +90,7 @@
                     <button class="bg-red-600 inline-block w-10 h-10"><i class="fas fa-search"></i></button>
                 </form>
             </div>
+            
             <div id="login" class="parent flex rounded-full  bg-black w-10 h-10">
                 <span class="block only-child-hover m-auto cursor-pointer">
                     <i class="fa-regular fa-user"></i>
@@ -121,11 +107,31 @@
                     </a>
                 </div>
             </div>
-            <div id="show-nav-sm" class="text-white rounded-full bg-black h-10 w-10 text-center leading-10 mx-2 hover:text-red-600 lg:hidden">
-                <span class="">
-                    <i class="fa-sharp fa-solid fa-bars"></i>
-                </span>
-            </div>
+
+            <!-- <div id="user-auth" class="parent flex rounded-full w-10 h-10">
+                    <div class="cursor-pointer user-select relative">
+                        <img src="{{asset('asset/img/avt.jpeg')}}" alt="" class="rounded-full">
+                        <div class="hidden user-action text-lg text-white absolute mt-2 p-2 top-full right-0 bg-black bg-opacity-40">
+                            <div class="cursor-default user-info w-40 pt-2 pb-4">
+                                <p class="w-full">User name</p>
+                                <p class="text-sm"><i>ntkduy@gamil.com</i></p>
+                            </div>
+                            <ul class="text-base">
+                                <li>
+                                    <a href="{{route('userpage')}}">Setting Account</a>
+                                </li>
+                                <li>
+                                    <a href="">Log Out <span><i class="fa-solid fa-right-from-bracket"></i></span></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+            </div> -->
+                <div id="show-nav-sm" class="text-white rounded-full bg-black h-10 w-10 text-center leading-10 mx-2 hover:text-red-600 lg:hidden">
+                    <span class="">
+                        <i class="fa-sharp fa-solid fa-bars"></i>
+                    </span>
+                </div>
         </div>
 
         <!-- nav on mobile -->
@@ -182,7 +188,7 @@
             </ul>
         </div>
     </header>
-    <div id="root" class="relative">
+    <div id="root" class="relative opacity-0">
     @yield('root')
     </div>
 
@@ -254,15 +260,16 @@
     </footer>
 
     @yield('js')
-    <!-- <script>
-        $(window).on('load',()=>{
+    <script>
+        
+        $(window).load(()=>{
             $('.loader').fadeOut(8000);
             setTimeout(() => {
-                
                 $('.loader-wrapper').hide();
+                $('#root').removeClass('opacity-0')
             }, 8000);
         })
-    </script> -->
+    </script>
 </body>
 
 </html>

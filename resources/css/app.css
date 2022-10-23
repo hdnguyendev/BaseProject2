@@ -354,6 +354,19 @@ div>h2 {
     z-index: 9999 !important;
  }
 
+ .user-select .user-action{
+    border-radius: 3px;
+    border: 1px white solid;
+ }
+
+ .user-select .user-action li{
+    padding: 2px 0;
+ }
+
+ .user-select .user-action li:hover{
+    @apply text-red-600;
+ }
+
 @keyframes bottomUp {
     0%{
         transform: translateY(100%);

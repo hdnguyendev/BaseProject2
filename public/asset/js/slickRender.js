@@ -44,13 +44,13 @@ function renderMovie(data){
                 // ongoing film
                 if (movieInfo['status'] == 'ongoing' && document.querySelector('#top-movie-banner') && document.querySelector('#top-movies')) {
                     const bannerElm =`
-                    <img class="w max-w-full lg:h-h h-full object-center object-cover"
+                    <img class="w max-w-full lg:h-h h-full object-center object-fill"
                         src="${movieInfo['poster_url'] || './asset/img/back-gr-login.jpg'}"
                         alt="">
                     `
                     const elm =`
-                    <div class="parent transition-all duration-500 movie-preview w-full py-2 relative">
-                    <img class="w-full h-full"
+                    <div class="parent transition-all duration-500 movie-preview w-full py-2 relative ">
+                    <img class="w-full h-44"
                         src="${movieInfo['poster_url'] || './asset/img/back-gr-login.jpg'}"
                         alt="">
                     <div class="child-overlay relative">
