@@ -35,6 +35,19 @@
     <!-- Main CSS-->
     <link href="{{ asset('asset/admin/css/theme.css') }}" rel="stylesheet" media="all">
 
+
+    <!-- Jquery JS-->
+    <script src="{{ asset('asset/admin/vendor/jquery-3.2.1.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.13.1/datatables.min.js"></script>
+
+    <style>
+        .hidden.sm\:flex-1.sm\:flex.sm\:items-center.sm\:justify-between{
+            display: none !important;
+        }
+    </style>
 </head>
 
 <body class="animsition">
@@ -172,7 +185,7 @@
 
                         </li>
                         <li class="">
-                            <a href="{{ URL::to('/') }}">
+                            <a href="{{ URL::to('/') }}" target="_blank">
                                 <i class="fas fa-home"></i>Visit Streamit</a>
 
                         </li>
@@ -180,7 +193,26 @@
                             <a href="{{ URL::to('/admin/clients-list') }}">
                                 <i class="fas fa-table"></i>Clients Management</a>
                         </li>
+                        <li>
+                            <a href="{{ URL::to('/admin/comments-list') }}">
+                                <i class="fas fa-table"></i>Comments and Ratings Management</a>
+                        </li>
 
+                        <li class="has-sub">
+                            <a class="js-arrow" href="#">
+                                <i class="fa fa-envelope"></i>Send mail</a>
+
+                            <ul class="list-unstyled navbar__sub-list js-sub-list">
+                                <li>
+                                    <a href="{{ URL::to('/send-mail') }}">
+                                        <i class="fa fa-user"></i>To a user</li>
+                                    </a>
+                                <li>
+                                    <a href="{{ URL::to('/send-mail') }}">
+                                        <i class="fa fa-users"></i>To all users</li>
+                                    </a>
+                            </ul>
+                        </li>
 
                     </ul>
                 </nav>
@@ -207,7 +239,8 @@
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ asset('asset/admin/images/icon/avatar-01.jpg') }}" alt="John Doe" />
+                                            <img src="{{ asset('asset/admin/images/icon/avatar-01.jpg') }}"
+                                                alt="John Doe" />
                                         </div>
                                         <div class="content">
                                             <a class="js-acc-btn" href="#">Admin</a>
@@ -216,7 +249,8 @@
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ asset('asset/admin/images/icon/avatar-01.jpg') }}" alt="John Doe" />
+                                                        <img src="{{ asset('asset/admin/images/icon/avatar-01.jpg') }}"
+                                                            alt="John Doe" />
                                                     </a>
                                                 </div>
                                                 <div class="content">
@@ -226,7 +260,7 @@
                                                     <span class="email">adminStreamit@gmail.com</span>
                                                 </div>
                                             </div>
-                                            <div class="account-dropdown__body">
+                                            {{-- <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
                                                         <i class="zmdi zmdi-account"></i>Account</a>
@@ -236,7 +270,7 @@
                                                         <i class="zmdi zmdi-settings"></i>Setting</a>
                                                 </div>
 
-                                            </div>
+                                            </div> --}}
                                             <div class="account-dropdown__footer">
                                                 <a href="{{ URL::to('admin/logout') }}">
                                                     <i class="zmdi zmdi-power"></i>Logout</a>
@@ -257,8 +291,7 @@
         </div>
 
     </div>
-    <!-- Jquery JS-->
-    <script src="{{ asset('asset/admin/vendor/jquery-3.2.1.min.js') }}"></script>
+
     <!-- Bootstrap JS-->
     <script src="{{ asset('asset/admin/vendor/bootstrap-4.1/popper.min.js') }}"></script>
     <script src="{{ asset('asset/admin/vendor/bootstrap-4.1/bootstrap.min.js') }}"></script>

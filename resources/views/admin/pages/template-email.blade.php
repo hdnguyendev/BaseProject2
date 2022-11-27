@@ -1,3 +1,5 @@
 
     <h1>{{ $mailData['title'] }}</h1>
-    <div>{{ $mailData['body'] }}</div>
+    @php
+        echo $mailData['body']
+    @endphp

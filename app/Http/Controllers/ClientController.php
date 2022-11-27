@@ -4,31 +4,42 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Comment;
+use App\Models\FavoriteMovies;
+use App\Models\Statistic;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Validator;
 
+use Carbon\Carbon;
 class ClientController extends Controller
 {
     private $client_model;
     private $comment_model;
-
+    private $statistic_model;
     public function __construct()
     {
         $this->client_model = new Client();
         $this->comment_model = new Comment();
+        $this->statistic_model = new Statistic();
     }
     public function userpage()
     {
         $client_id = Session::get("client_id");
-        $result = $this->client_model->getData($client_id);
-        return view('userpage')->with('data', $result);
+        $data = $this->client_model->getData($client_id);
+        $favorite_data = FavoriteMovies::getListFavorite($client_id);
+        return view('userpage',compact('data', 'favorite_data'));
     }
     public function detailpage($id){
+
+        $dt = Carbon::now();
         $comments = $this->comment_model->getCommentsbyMovieId($id);
-        return view('detail', compact('id','comments'));
+        $this->statistic_model->updateViews([$id,$dt->toDateString()]);
+
+        $rating_statistic = $this->comment_model->getDataRatingAverage($id);
+        return view('detail', compact('id','comments','rating_statistic'));
     }
     public function checkLogin(Request $request)
     {
@@ -37,7 +48,7 @@ class ClientController extends Controller
         $result = $this->client_model->checkLogin($client_account, $client_password);
         if ($result) {
             if (!$result->client_status) {
-                return view('login')->with('message', "TÀI KHOẢN CỦA BẠN ĐÃ BỊ CHẶN!");
+                return back()->with('message', "This account has been banned. Contact admin for more details!")->withInput();
             }
             Session::put("client_id", $result->client_id);
             Session::put("client_email", $result->client_email);
@@ -45,7 +56,7 @@ class ClientController extends Controller
             Session::put("client_avatar", $result->client_avatar);
             return Redirect::to('/');
         } else {
-            return view('login')->with('message', "Sai tk or mk");
+            return redirect()->back()->with('message', "Wrong username/email or password. Please try again!")->withInput();
         }
     }
     public function logout()
@@ -53,7 +64,7 @@ class ClientController extends Controller
         Session::forget("client_id");
         Session::forget("client_email");
         Session::forget("client_username");
-        return view('login');
+        return Redirect::to('/login');
     }
     public function register(Request $request)
     {
@@ -62,7 +73,7 @@ class ClientController extends Controller
             'client_name'     => 'required|max:255',
             'client_username' => 'required|max:100',
             'client_email'    => 'required|email',
-            'client_password' => 'required|min:8|confirmed',
+            'client_password' => 'required|min:6|confirmed',
 
         ]);
         $data = array(
@@ -79,12 +90,6 @@ class ClientController extends Controller
         else
             return Redirect::to('login')->with('message', 'Register failed. Try again');
     }
-
-    // public function update_profile(Request $request)
-    // {
-    //     $data = [$request->client_name, $request->client_email, $request->client_new_password, Session::get("client_id")];
-    //     $this->client_model->update_profile($data);
-    // }
     public function change_avatar(Request $request)
     {
 
@@ -117,8 +122,10 @@ class ClientController extends Controller
         }
 
     }
-    public function change_password(Request $request)
+    public function update_profile(Request $request)
     {
+
+
         $data = $this->client_model->getData(Session::get('client_id'));
         $old_password = $data->client_password;
         if (md5($request->old_password) != $old_password ) {
@@ -126,16 +133,17 @@ class ClientController extends Controller
         } else if ($request->new_password != $request->valid_password){
             return "Mật khẩu xác nhận không chính xác. Vui lòng thử lại!";
         } else if ($request->new_password == "" && $request->valid_password == "") {
-            $data = [$request->name, $request->useremail, md5($request->old_password)];
+            $data = [$request->name, $request->useremail, $old_password, Session::get('client_id')];
             $result = $this->client_model->changeProfile($data);
-            if ($result)
+            if ($result == true)
             return "Đổi thông tin cá nhân thành công!";
             else return "Đổi thông tin cá nhân thất bại!";
         } else {
-            $data = [$request->name, $request->useremail, md5($request->new_password)];
+
+            $data = [$request->name, $request->useremail, md5($request->new_password), Session::get('client_id')];
             $result = $this->client_model->changeProfile($data);
-            if ($result)
-            return "Đổi thông tin cá nhân thành công!";
+            if ($result == true)
+            return "Đổi thông tin cá nhân và mật khẩu thành công!";
             else return "Đổi thông tin cá nhân thất bại!";
         }
 
@@ -143,11 +151,18 @@ class ClientController extends Controller
     public function add_comment(Request $request)
     {
         // $data = $this->client_model->getData(Session::get('client_id'));
+        if (Session::get('client_id') == "") return "Bạn chưa đăng nhập, vui lòng đăng nhập trước!";
         $client_id = Session::get('client_id');
         $data = [$request->movie_name, $request->comment_content,$request->comment_rating, $client_id];
         $result = $this->comment_model->addComment($data);
         return $result;
 
+    }
+    public function add_favorite($movie_name)
+    {
+        if (Session::get('client_id') == null) return Redirect::to('/login');
+        $result = DB::insert('INSERT into tbl_favorite_movies (client_id, movie_name) values (?, ?)', [Session::get('client_id'), $movie_name]);
+        if ($result) return Redirect::to('/user'); else return redirect()->back();
     }
 
 }

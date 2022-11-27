@@ -23,15 +23,14 @@
                     <img src="./asset/img/logo.png" alt="">
                 </a>
             </div>
-            @if (isset($message))
-                <div style="color: red">
-                    {{ $message }}
-                </div>
+            @if (Session::get('message'))
+                <div style="color: red">{{ Session::get('message') }}</div>
             @endif
+
             <form action="{{ URL::to('/check-login') }}" class="flex flex-col w-full pb-4" method="POST">
                 {{ csrf_field() }}
                 <label class="text-xl py-4" for="account-input">Username or Email Address</label>
-                <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="text" name="client_account" required
+                <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="text" name="client_account" required value="{{ old('client_account') }}"
                     id="account-input">
                 <label class="text-xl py-4" for="password-input">Password</label>
                 <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="password" name="client_password" required

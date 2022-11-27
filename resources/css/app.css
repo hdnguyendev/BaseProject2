@@ -464,3 +464,83 @@ div>h2 {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
+
+.show-rating {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+.show-rating-total{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.show-rating-total h4 {
+    font-size: 18px;
+}
+
+.show-rating-total > p{
+    font-size: 44px;
+    font-weight: bold;
+    color: red;
+    line-height: 44px;
+}
+
+.show-rating-stars {
+    position: relative;
+}
+.stars-rating {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 90%;
+    overflow: hidden;
+    height: 100%;
+    white-space: nowrap;
+}
+
+.stars-rating  i {
+    color: red;
+}
+
+.show-rating-ratio {
+    display: flex;
+    flex-direction: column;
+}
+
+.show-rating-ratio-group {
+    display: flex;
+    justify-content: space-between;
+    min-width: 280px;
+    align-items: center;
+    padding-top: 5px;
+}
+.show-rating-ratio-group span {
+    width: 70px;
+
+}
+.show-rating-ratio-group .ratio-bar {
+    position: relative;
+    width: 60%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: rgb(213, 217, 216);
+    margin: 0 5px;
+}
+.show-rating-ratio-group .ratio-bar .ratio-bar-process {
+    position: absolute;
+    left: 0;
+    width: 70%;
+    height: 4px;
+    border-radius: 2px;
+    background-color: red;
+}

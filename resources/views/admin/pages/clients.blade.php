@@ -1,6 +1,7 @@
 @extends('admin.layouts.layout')
 @section('main_content')
     <!-- MAIN CONTENT-->
+
     <div class="main-content">
         <div class="section__content section__content--p30">
             <div class="col-md-12">
@@ -9,11 +10,13 @@
 
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2">
+
                         <thead>
                             <tr>
                                 <th>no.</th>
                                 <th>name</th>
                                 <th>email</th>
+                                <th>send mail</th>
                                 <th>username</th>
                                 {{-- <th>date</th> --}}
                                 <th>avatar</th>
@@ -36,8 +39,15 @@
                                         <td>
                                             <span class="block-email">{{ $item->client_email }}</span>
                                         </td>
+                                        <td>
+                                            <a href="{{ route('send_mail', ['id' => $item->client_id]) }}">
+                                                <button type="button" class="btn btn-info">
+                                                    <i class="zmdi zmdi-mail-send"></i>
+                                                    Send mail
+                                                </button>
+                                            </a>
+                                        </td>
                                         <td>{{ $item->client_username }}</td>
-                                        {{-- <td>2018-09-27 02:12</td> --}}
                                         <td><img width=50px height=50px
                                                 src="{{ asset('upload/avatars/' . $item->client_avatar) }}" alt="">
                                         </td>
@@ -49,25 +59,20 @@
 
                                         <td>
                                             <div class="table-data-feature">
-                                                <a href="{{ route('send_mail',['id' => $item->client_id]) }}">
-                                                    <button class="item" data-toggle="tooltip" data-placement="top"
-                                                        title="" data-original-title="Send">
-                                                        <i class="zmdi zmdi-mail-send"></i>
-                                                    </button>
-                                                </a>
-                                                <button class="item" data-toggle="tooltip" data-placement="top"
+
+                                                {{-- <button class="item" data-toggle="tooltip" data-placement="top"
                                                     title="" data-original-title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
-                                                </button>
+                                                </button> --}}
                                                 @if ($item->client_status)
-                                                    <a href="{{ route('ban_client',['id' => $item->client_id])}}">
+                                                    <a href="{{ route('ban_client', ['id' => $item->client_id]) }}">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="" data-original-title="Ban">
                                                             <i class="zmdi zmdi-block"></i>
                                                         </button>
                                                     </a>
                                                 @else
-                                                    <a href="{{ route('unban_client',['id' => $item->client_id]) }}">
+                                                    <a href="{{ route('unban_client', ['id' => $item->client_id]) }}">
                                                         <button class="item" data-toggle="tooltip" data-placement="top"
                                                             title="" data-original-title="Unban">
                                                             <i class="zmdi zmdi-star"></i>
@@ -82,11 +87,20 @@
                             @endif
 
                         </tbody>
+
                     </table>
+
+
                 </div>
 
+
             </div>
+            <div class="col-lg-6"> {{ $data->links() }}</div>
+
         </div>
+
     </div>
+   
+    <script></script>
     <!-- END MAIN CONTENT-->
 @endsection

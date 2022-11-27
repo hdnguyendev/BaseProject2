@@ -26,7 +26,7 @@
                       slidesToShow: 2,
                       slidesToScroll: 1,
                       centerMode:true,
-                      
+
                     },
               }
         ]
@@ -34,7 +34,7 @@
 // function to call api and render
 function renderMovie(data){
     for (let i = 0; i < data.length; i++) {
-        
+
         const detailMovieURL =`https://ophim1.com/phim/${data[i]}`
         fetch(detailMovieURL)
             .then(data => data.json())
@@ -76,7 +76,7 @@ function renderMovie(data){
                 }
                 // feature film
                 if (movieInfo['episode_total']==1 && document.querySelector('.slick-slider-horizontal#feature-movies')) {
-                    
+
                     const elm =`
                     <div
                                 class="parent transform hover:scale-105 transition-all duration-500 movie-preview w-1/2 px-2 relative h-64 md:w-1/4 md:h-48">
@@ -85,34 +85,25 @@ function renderMovie(data){
                                     alt="">
                                 <div class="child-overlay relative">
                                     <div class="ver-bar"></div>
-            
+
                                     <div class="side-action flex-col justify-around absolute right-4 top-1/2 -translate-y-1/2">
                                         <div class="circle-action relative">
                                             <i class="fa-solid fa-share-nodes"></i>
-                                            <div
-                                                class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                                                <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-            
-                                            </div>
+
                                         </div>
                                         <div class="circle-action relative">
-                                            <i class="fa-solid fa-heart"></i>
-                                            <div
-                                                class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-            
-                                            </div>
+                                        <a href="/add-favorite/${movieInfo['slug']}">
+                                        <i class="fa-solid fa-heart"></i>
+                                        </a>
+
+
+                                        </button>
                                         </div>
                                         <div class="circle-action relative">
                                             <i class="fa-solid fa-add"></i>
-                                            <div
-                                                class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-            
-                                            </div>
+
                                         </div>
-            
+
                                     </div>
                                 </div>
                                 <div class="absolute top-1/2 transform -translate-y-1/2 pl-2 left-4">
@@ -125,11 +116,11 @@ function renderMovie(data){
                                         Play now
                                     </a>
                                 </div>
-            
+
                             </div>`
                     $('.slick-slider-horizontal#feature-movies').slick('slickAdd', elm)
                 }
-                
+
                 // series film
                 if (movieInfo['type']=='series' && document.querySelector('.slick-slider-horizontal#long-movies')){
                     const elma =`
@@ -140,34 +131,23 @@ function renderMovie(data){
                                     alt="">
                                 <div class="child-overlay relative">
                                     <div class="ver-bar"></div>
-            
+
                                     <div class="side-action flex-col justify-around absolute right-4 top-1/2 -translate-y-1/2">
                                         <div class="circle-action relative">
                                             <i class="fa-solid fa-share-nodes"></i>
-                                            <div
-                                                class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                                                <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-            
-                                            </div>
+
                                         </div>
                                         <div class="circle-action relative">
-                                            <i class="fa-solid fa-heart"></i>
-                                            <div
-                                                class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-            
-                                            </div>
+                                        <a href="/add-favorite/${movieInfo['slug']}">
+                                        <i class="fa-solid fa-heart"></i>
+                                        </a>
+
                                         </div>
                                         <div class="circle-action relative">
                                             <i class="fa-solid fa-add"></i>
-                                            <div
-                                                class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-            
-                                            </div>
+
                                         </div>
-            
+
                                     </div>
                                 </div>
                                 <div class="absolute top-1/2 transform -translate-y-1/2 pl-2 left-4">
@@ -180,7 +160,7 @@ function renderMovie(data){
                                         Play now
                                     </a>
                                 </div>
-            
+
                             </div>`
                     $('.slick-slider-horizontal#long-movies').slick('slickAdd', elma)
                 }
@@ -197,28 +177,17 @@ function renderMovie(data){
                         <div class="side-action flex-col justify-around absolute right-4 top-1/2 -translate-y-1/2">
                             <div class="circle-action relative">
                                 <i class="fa-solid fa-share-nodes"></i>
-                                <div
-                                    class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                    <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                                    <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
 
-                                </div>
                             </div>
                             <div class="circle-action relative">
-                                <i class="fa-solid fa-heart"></i>
-                                <div
-                                    class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                    <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
+                            <a href="/add-favorite/${movieInfo['slug']}">
+                            <i class="fa-solid fa-heart"></i>
+                            </a>
 
-                                </div>
                             </div>
                             <div class="circle-action relative">
                                 <i class="fa-solid fa-add"></i>
-                                <div
-                                    class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                    <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
 
-                                </div>
                             </div>
 
                         </div>
@@ -237,7 +206,7 @@ function renderMovie(data){
                     </div>`
                     $('#cartoon-movies').slick('slickAdd', elm);
                 }
-                
+
             })
     }
 
@@ -246,7 +215,7 @@ function renderMovie(data){
 var callApiData = function(page){
     for (let i = 0; i < page.length; i++) {
         const url = `https://ophim1.com/danh-sach/phim-moi-cap-nhat?page=${page[i]}`;
-    
+
         fetch(url)
             .then(res => res.json())
             .catch()
@@ -272,34 +241,23 @@ var callApiData = function(page){
                                             alt="">
                                         <div class="child-overlay relative">
                                             <div class="ver-bar"></div>
-                    
+
                                             <div class="side-action flex-col justify-around absolute right-4 top-1/2 -translate-y-1/2">
                                                 <div class="circle-action relative">
                                                     <i class="fa-solid fa-share-nodes"></i>
-                                                    <div
-                                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                    
-                                                    </div>
+
                                                 </div>
                                                 <div class="circle-action relative">
-                                                    <i class="fa-solid fa-heart"></i>
-                                                    <div
-                                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                    
-                                                    </div>
+                                                <a href="/add-favorite/${movieInfo['slug']}">
+                                                <i class="fa-solid fa-heart"></i>
+                                                </a>
+
                                                 </div>
                                                 <div class="circle-action relative">
                                                     <i class="fa-solid fa-add"></i>
-                                                    <div
-                                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                    
-                                                    </div>
+                                                   
                                                 </div>
-                    
+
                                             </div>
                                         </div>
                                         <div class="absolute top-1/2 transform -translate-y-1/2 pl-2 left-4">
@@ -312,7 +270,7 @@ var callApiData = function(page){
                                                 Play now
                                             </a>
                                         </div>
-                    
+
                                     </div>`
                                     $('#upcoming_movies').slick('slickAdd', elm)
                                     })
@@ -403,7 +361,7 @@ var callApiData = function(page){
                                                 </div>
                                                 <h1 class="uppercase text-2xl md:text-4xl lg:text-5xl font-bold text-white py-2">${movieInfo['name']}</h1>
                                                 <div class="flex my-3 w-84 items-center text-white">
-                                            
+
                                                     <p class=" mr-4">${movieInfo['episode_total']}</p>
                                                     <div class="flex items-center">
                                                         <div class="mr-2 w-8 h-8 leading-8 bg-gray-500 text-white text-center font-bold">GP</div>
@@ -424,8 +382,8 @@ var callApiData = function(page){
                                                             }
                                                         }).join('')
                                                     }
-                                                        
-                                                    
+
+
                                                     </ul>
                                                 </div>
                                                 <a href='./detail/${movieInfo['slug']}' class="btn-primary mt-4">
@@ -443,7 +401,7 @@ var callApiData = function(page){
                                                             <circle class="foreground" r="50" cy="55" cx="55" />
                                                             <polygon class="triangle-bg" points="38 28, 80 55, 38 80" />
                                                             <polygon class="triangle-fore" points="38 28, 80 55, 38 80" />
-    
+
                                                         </svg>
                                                         <h2 class="text-gray-300 ml-2">Watch trailer</h2>
                                                     </div>
@@ -452,16 +410,16 @@ var callApiData = function(page){
                                         </div>`
                                         $('#banner-slick').slick('slickAdd', elm)
                                         })
-                            
+
                         }
 
                     }
                 }
-                
+
                 renderMovie(listSlugs)
             }
             )
-            
+
     }
 
 
@@ -485,8 +443,9 @@ $('#upcoming_movies').slick({
                 nextArrow: '<button class="slide-arrow -right-4"><i class="fa-solid fa-caret-right"></i></button>'
               },
         }
-    
+
     ]
 });
+
 
 

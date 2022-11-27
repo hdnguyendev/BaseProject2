@@ -7,6 +7,7 @@
 
 
 @section('root')
+
     <div class="mt-20">
         <div class="user-wrapper text-white">
             <div id="user" class="min-h-screen">
@@ -36,67 +37,7 @@
                     <div class="flex flex-col text-white py-4 px-8">
                         <h3 class="text-xl md:text-2xl lg:text-4xl">Favorite Movies</h3>
                         <div id="favorite-movies" class="mt-4 md:flex md:flex-wrap">
-                            <div class="favorite-movie relative md:w-1/4 p-4">
-                                <img src="./asset/img/back-gr-login.jpg" alt="">
-                                <div class="absolute top-1/2 -translate-y-1/2 left-8">
-                                    <h1 class="my-2 text-xl">Ten phim</h1>
-                                    <a href="" class="btn-primary">Play</a>
-                                </div>
-                                <div class="hidden remove absolute top-6 right-6 items-center">
-                                    <span>Remove </span> <span
-                                        class="w-5 h-5 text-center text-red-600 bg-white leading-5"><i
-                                            class="fa fa-close"></i></span>
-                                </div>
-                            </div>
 
-                            <div class="favorite-movie relative md:w-1/4 p-4">
-                                <img src="./asset/img/back-gr-login.jpg" alt="">
-                                <div class="absolute top-1/2 -translate-y-1/2 left-8">
-                                    <h1 class="my-2 text-xl">Ten phim</h1>
-                                    <a href="" class="btn-primary">Play</a>
-                                </div>
-                                <div class="hidden remove absolute top-6 right-6 items-center">
-                                    <span>Remove </span> <span
-                                        class="w-5 h-5 text-center text-red-600 bg-white leading-5"><i
-                                            class="fa fa-close"></i></span>
-                                </div>
-                            </div>
-                            <div class="favorite-movie relative md:w-1/4 p-4">
-                                <img src="./asset/img/back-gr-login.jpg" alt="">
-                                <div class="absolute top-1/2 -translate-y-1/2 left-8">
-                                    <h1 class="my-2 text-xl">Ten phim</h1>
-                                    <a href="" class="btn-primary">Play</a>
-                                </div>
-                                <div class="hidden remove absolute top-6 right-6 items-center">
-                                    <span>Remove </span> <span
-                                        class="w-5 h-5 text-center text-red-600 bg-white leading-5"><i
-                                            class="fa fa-close"></i></span>
-                                </div>
-                            </div>
-                            <div class="favorite-movie relative md:w-1/4 p-4">
-                                <img src="./asset/img/back-gr-login.jpg" alt="">
-                                <div class="absolute top-1/2 -translate-y-1/2 left-8">
-                                    <h1 class="my-2 text-xl">Ten phim</h1>
-                                    <a href="" class="btn-primary">Play</a>
-                                </div>
-                                <div class="hidden remove absolute top-6 right-6 items-center">
-                                    <span>Remove </span> <span
-                                        class="w-5 h-5 text-center text-red-600 bg-white leading-5"><i
-                                            class="fa fa-close"></i></span>
-                                </div>
-                            </div>
-                            <div class="favorite-movie relative md:w-1/4 p-4">
-                                <img src="./asset/img/back-gr-login.jpg" alt="">
-                                <div class="absolute top-1/2 -translate-y-1/2 left-8">
-                                    <h1 class="my-2 text-xl">Ten phim</h1>
-                                    <a href="" class="btn-primary">Play</a>
-                                </div>
-                                <div class="hidden remove absolute top-6 right-6 items-center">
-                                    <span>Remove </span> <span
-                                        class="w-5 h-5 text-center text-red-600 bg-white leading-5"><i
-                                            class="fa fa-close"></i></span>
-                                </div>
-                            </div>
 
                         </div>
                     </div>
@@ -171,7 +112,7 @@
             </p>
         </form>
         @if ($data)
-            <form method="POST" action="{{ URL::to('/update-profile') }}" id="change-account-form"
+            <form method="POST" action="{{ route('update_profile_ajax') }}" id="change-account-form"
                 class="hidden text-white flex flex-col justify-center items-center w-screen h-screen p-4 fixed top-0 bg-black">
                 @csrf
                 <div id="message"></div>
@@ -190,7 +131,7 @@
                 </div>
                 <div class="flex p-2 items-center mb-2">
                     <label for="useremail" class="w-28 block">Email: </label>
-                    <input id="useremail" type="text" required
+                    <input id="useremail" type="email" required
                         class="bg-black p-1 text-lg border-solid border-2 border-red-600" name="client_email"
                         value="{{ $data->client_email }}">
                 </div>
@@ -233,7 +174,7 @@
 
             $.ajax({
                 type: 'POST',
-                url: "{{ route('change_password_ajax') }}",
+                url: "{{ route('update_profile_ajax') }}",
                 data: {
                     "_token": '{{ csrf_token() }}',
                     "name": $("#name").val(),
@@ -244,15 +185,51 @@
                 },
                 success: function(data) {
                     $('#message').html(data);
-                    $( "input:email").empty();
-                    $( "input:password").empty();
+                    $("#old_password").val("");
+                    $("#new_password").val("");
+                    $("#valid_password").val("");
                     console.log('Successful.');
                 },
                 error: function(data) {
-                    $('#message').html(data);
+                    $('#message').html('Có lỗi xảy ra!');
                     console.log('Error');
                 },
             });
         });
+    </script>
+    <script>
+        const listSlugs = [];
+        @php
+            foreach($favorite_data as $item){
+
+                echo 'listSlugs.push(`'.$item->movie_name.'`);';
+
+            }
+        @endphp
+
+
+
+        listSlugs.forEach(slug => {
+                            const detailMovieURL =`https://ophim1.com/phim/${slug}`
+                            fetch(detailMovieURL)
+                                .then(res => res.json())
+                                .then(data => {
+                                    const movieInfo = data['movie']
+                                        const elma =`
+                                            <div class="favorite-movie relative md:w-1/4 p-4">
+                                <img src="${movieInfo['poster_url'] || './asset/img/back-gr-login.jpg'}" alt="">
+                                <div class="absolute top-1/2 -translate-y-1/2 left-8">
+                                    <h1 class="my-2 text-xl">${movieInfo['name']}</h1>
+                                    <a href="${window.location.origin}/detail/${movieInfo['slug']}" class="btn-primary">Play</a>
+                                </div>
+                                <div class="hidden remove absolute top-6 right-6 items-center">
+                                    <span>Remove </span> <span
+                                        class="w-5 h-5 text-center text-red-600 bg-white leading-5"><i
+                                            class="fa fa-close"></i></span>
+                                </div>
+                            </div>`
+                                        $('#favorite-movies').append(elma)
+                                })
+                        });
     </script>
 @endsection

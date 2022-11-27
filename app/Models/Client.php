@@ -11,7 +11,15 @@ class Client extends Model
     use HasFactory;
     public function getAll()
     {
+
         $result = DB::table('tbl_client')->get();
+        return $result;
+    }
+    public function getAll_Paginite()
+    {
+
+        // $result = DB::table('tbl_client')->get();
+        $result = DB::table('tbl_client')->paginate(5);
         return $result;
     }
     public function getData($client_id)
@@ -36,7 +44,7 @@ class Client extends Model
     }
     public function changeProfile($data)
     {
-        $result = DB::update('UPDATE tbl_client SET client_name = ?,  client_email = ?, client_password = ?', $data);
+        $result = DB::update('UPDATE tbl_client SET client_name = ?,  client_email = ?, client_password = ? where client_id= ?', $data);
         return $result;
     }
     public function register($data)

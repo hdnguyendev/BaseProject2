@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -13,26 +14,26 @@ use Illuminate\Support\Facades\Session;
 class AdminController extends Controller
 {
     private Client $client_model;
-    public function __construct() {
+    private Comment $comment_model;
+    public function __construct()
+    {
         $this->client_model = new Client();
+        $this->comment_model = new Comment();
     }
+
     public function index()
     {
         if (Session::get('admin_id') != null) {
             return view('admin.pages.home');
-        }
-        else {
-            return Redirect::to('admin/login');
+        } else {
+            return view('admin.login');
         }
     }
     public function sign_in()
     {
-        if (Session::get('admin_id') != null) {
-            return Redirect::to('admin');
-        } else {
+        if (Session::get('admin_id') == null) {
             return view('admin.login');
-
-        }
+        } else return Redirect::to('/admin');
     }
     public function check_login(Request $request)
     {
@@ -44,21 +45,33 @@ class AdminController extends Controller
             return Redirect::to('/admin');
         } else {
             Session::put('message', 'Username/password is wrong. Please try again!');
-            return Redirect::to('admin/login');
+            return Redirect::to('/admin/login');
         }
-        return view('admin.pages.home');
     }
     public function logout()
     {
-        Session::put('admin_name', null);
-        Session::put('admin_id', null);
-        return view('admin.login');
+        Session::forget('admin_name');
+        Session::forget('admin_id');
+        return Redirect::to('/admin/login');
     }
     //
     public function clients_list()
     {
-        $data = $this->client_model->getAll();
-        return view('admin.pages.clients')->with('data', $data);
+        if (Session::get('admin_id') == null) {
+            return Redirect::to('/admin/login');
+        } else{
+            $data = $this->client_model->getAll_Paginite();
+            return view('admin.pages.clients')->with('data', $data);
+        }
+
+    }
+    public function comments_list()
+    {
+        if (Session::get('admin_id') == null) {
+            return Redirect::to('/admin/login');
+        } else{
+        $data = $this->comment_model->getAll();
+        return view('admin.pages.comments')->with('data', $data);}
     }
     public function ban_client($id)
     {
@@ -70,5 +83,11 @@ class AdminController extends Controller
         $result = $this->client_model->unban($id);
         return redirect()->back();
     }
-
+    public function change_status_comment($id)
+    {
+        $result = $this->comment_model->updateStatus([$id]);
+        if ($result) {
+            return "OK";
+        } else return "NO";
+    }
 }

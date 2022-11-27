@@ -39,9 +39,9 @@ async function getListSlug(type) {
             data['items'].forEach(item => {
                 listSlugs.push(item['slug'])
             });
-            
+
         } catch (error) {
-            
+
         }
     }
     if (type=='single' || type =='series') {
@@ -54,8 +54,8 @@ async function getListSlug(type) {
                         listTypeSlugs.push(listSlugs[i])
                     }
             } catch (error) {
-                
-            }    
+
+            }
         }
     }else{
         for (let i = 0; i < 100; i++) {
@@ -69,11 +69,11 @@ async function getListSlug(type) {
                         if (check) {
                             listTypeSlugs.push(listSlugs[i])
                         }
-            
+
                     }
             } catch (error) {
-                
-            }    
+
+            }
         }
     }
 
@@ -89,7 +89,7 @@ function renderToBox(list){
             .then(data => {
                 const movieInfo = data['movie']
                         console.log(movieInfo['name']);
-                        const elm =`    
+                        const elm =`
                         <div
                         class="parent transform hover:scale-105 transition-all duration-500 movie-preview w-full my-4 px-2 relative h-64 md:w-1/4 md:h-48">
                         <img class="w-full h-full"
@@ -97,34 +97,24 @@ function renderToBox(list){
                             alt="">
                         <div class="child-overlay relative">
                             <div class="ver-bar"></div>
-    
+
                             <div class="side-action flex-col justify-around absolute right-4 top-1/2 -translate-y-1/2">
                                 <div class="circle-action relative">
                                     <i class="fa-solid fa-share-nodes"></i>
-                                    <div
-                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-    
-                                    </div>
+
                                 </div>
                                 <div class="circle-action relative">
-                                    <i class="fa-solid fa-heart"></i>
-                                    <div
-                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-    
-                                    </div>
+                                <a href="/add-favorite/${movieInfo['slug']}">
+                                <i class="fa-solid fa-heart"></i>
+                                </a>
+
+
                                 </div>
                                 <div class="circle-action relative">
                                     <i class="fa-solid fa-add"></i>
-                                    <div
-                                        class="-z-10 absolute right-full hidden justify-center top-1/2 transform -translate-y-1/2 h-8 bg-black items-center">
-                                        <a href="" class="p-2 text-hover pr-3"><i class="fa-brands fa-twitter"></i></a>
-    
-                                    </div>
+
                                 </div>
-    
+
                             </div>
                         </div>
                         <div class="absolute top-1/2 transform -translate-y-1/2 pl-2 left-4 text-white">
@@ -137,7 +127,7 @@ function renderToBox(list){
                                 Play now
                             </a>
                         </div>
-    
+
                     </div>
                         `
                         $('#box').append(elm);
@@ -150,7 +140,7 @@ function renderType(type){
     const call = getListSlug(type)
     call
      .then(data => renderToBox(data))
-    
+
     function load() {
         page++
         call

@@ -12,11 +12,11 @@
 </head>
 
 <body>
-    {{-- <div class="loader-wrapper">
+    <div class="loader-wrapper">
         <div class="loader bg-color-main">
             <img src="{{ asset('asset/img/loader.gif') }}" alt="" class="w-96">
         </div>
-    </div> --}}
+    </div>
     <header
         class="
         z-50
@@ -95,7 +95,7 @@
                     <button class="bg-red-600 inline-block w-10 h-10"><i class="fas fa-search"></i></button>
                 </form>
             </div>
-            @if (!Session::get("client_id"))
+            @if (!Session::get('client_id'))
                 <div id="login" class="parent flex rounded-full  bg-black w-10 h-10">
                     <span class="block only-child-hover m-auto cursor-pointer">
                         <i class="fa-regular fa-user"></i>
@@ -119,12 +119,13 @@
                     <div class="cursor-pointer user-select relative">
                         @php
                         @endphp
-                        <img src="{{ asset('upload/avatars/'.Session::get("client_avatar")) }}" alt="" class="rounded-full h-10 w-10">
+                        <img src="{{ asset('upload/avatars/' . Session::get('client_avatar')) }}" alt=""
+                            class="rounded-full h-10 w-10">
                         <div
                             class="hidden user-action text-lg text-white absolute mt-2 p-2 top-full right-0 bg-black bg-opacity-40">
                             <div class="cursor-default user-info w-40 pt-2 pb-4">
-                                <p class="w-full">{{ Session::get("client_username") }}</p>
-                                <p class="text-sm"><i>{{ Session::get("client_email") }}</i></p>
+                                <p class="w-full">{{ Session::get('client_username') }}</p>
+                                <p class="text-sm"><i>{{ Session::get('client_email') }}</i></p>
                             </div>
                             <ul class="text-base">
                                 <li>
@@ -280,8 +281,9 @@
         </div>
     </footer>
 
+
     @yield('js')
-    {{-- <script>
+    <script>
         $(window).load(() => {
             $('.loader').fadeOut(8000);
             setTimeout(() => {
@@ -289,11 +291,9 @@
                 $('#root').removeClass('opacity-0')
             }, 8000);
         })
-    </script> --}}
-    <script>
-        $('#root').removeClass('opacity-0')
-
     </script>
+   
+
 </body>
 
 </html>
