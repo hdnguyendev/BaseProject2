@@ -40,7 +40,7 @@
                                             <span class="block-email">{{ $item->client_email }}</span>
                                         </td>
                                         <td>
-                                            <a href="{{ route('send_mail', ['id' => $item->client_id]) }}">
+                                            <a href="{{ route('view_send_mail_id', ['id' => $item->client_id]) }}">
                                                 <button type="button" class="btn btn-info">
                                                     <i class="zmdi zmdi-mail-send"></i>
                                                     Send mail
@@ -100,7 +100,7 @@
         </div>
 
     </div>
-   
+
     <script></script>
     <!-- END MAIN CONTENT-->
 @endsection

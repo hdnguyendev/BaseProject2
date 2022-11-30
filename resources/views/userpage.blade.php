@@ -217,7 +217,7 @@
                                     const movieInfo = data['movie']
                                         const elma =`
                                             <div class="favorite-movie relative md:w-1/4 p-4">
-                                <img src="${movieInfo['poster_url'] || './asset/img/back-gr-login.jpg'}" alt="">
+                                <img  src="${movieInfo['poster_url'] || './asset/img/back-gr-login.jpg'}" alt="">
                                 <div class="absolute top-1/2 -translate-y-1/2 left-8">
                                     <h1 class="my-2 text-xl">${movieInfo['name']}</h1>
                                     <a href="${window.location.origin}/detail/${movieInfo['slug']}" class="btn-primary">Play</a>

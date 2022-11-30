@@ -180,7 +180,7 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li class="">
-                            <a href="#">
+                            <a href="{{ URL::to('/admin') }}">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard</a>
 
                         </li>
@@ -199,19 +199,10 @@
                         </li>
 
                         <li class="has-sub">
-                            <a class="js-arrow" href="#">
+                            <a class="js-arrow" href="{{ URL::to('/send-mail/all') }}">
                                 <i class="fa fa-envelope"></i>Send mail</a>
 
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="{{ URL::to('/send-mail') }}">
-                                        <i class="fa fa-user"></i>To a user</li>
-                                    </a>
-                                <li>
-                                    <a href="{{ URL::to('/send-mail') }}">
-                                        <i class="fa fa-users"></i>To all users</li>
-                                    </a>
-                            </ul>
+
                         </li>
 
                     </ul>
@@ -309,7 +300,7 @@
 
     <!-- Main JS-->
     <script src="{{ asset('asset/admin/js/main.js') }}"></script>
-
+    @yield('js')
 </body>
 
 </html>

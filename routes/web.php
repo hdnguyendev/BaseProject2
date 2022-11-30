@@ -64,8 +64,12 @@ Route::prefix('admin')->group(function () {
     Route::get('/unban/{id}',[AdminController::class, 'unban_client'])->name('unban_client');
 });
 
-Route::get('/send-mail/{id}', [MailController::class, 'index'])->name('send_mail');
+// MAIL
+Route::get('/send-mail/{id}', [MailController::class, 'view_send_mail_id'])->name('view_send_mail_id');
+Route::get('/send-mail-all', [MailController::class, 'view_send_mail_all']);
 Route::post('/send-mail-id', [MailController::class, 'sendMail'])->name('send_mail_id');
+Route::post('/send-mail-all', [MailController::class, 'sendAllMail'])->name('send_mail_all');
+
 
 Route::post('/check-login',[ClientController::class, 'checkLogin']);
 Route::get('/logout',[ClientController::class,'logout']);

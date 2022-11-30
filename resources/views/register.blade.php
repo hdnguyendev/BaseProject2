@@ -35,11 +35,11 @@
             <form action="{{ URL::to('/register') }}" method="POST" class="flex flex-col w-full pb-4">
                 {{ csrf_field() }}
                 <label class="text-xl py-4" for="account-input">Full name</label>
-                <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="text" name="client_name">
+                <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="text" name="client_name" value="{{ old('client_name') }}">
                 <label class="text-xl py-4" for="account-input">Email Address</label>
-                <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="text" name="client_email">
+                <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="text" name="client_email" value="{{ old('client_email') }}">
                 <label class="text-xl py-4" for="account-input">Username</label>
-                <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="text" name="client_username">
+                <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="text" name="client_username" value="{{ old('client_username') }}">
                 <label class="text-xl py-4" for="password-input">Password</label>
                 <input class="h-10 text-lg py-2 px-3 mb-2 text-gray-700" type="password" name="client_password">
                 <label class="text-xl py-4" for="valid-password-input" >Confirm Password</label>

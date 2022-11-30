@@ -169,7 +169,7 @@
                 </div>
                 <label class="text-lg pt-3 pb-1" for="textarea-review">Your review *</label>
                 <textarea name="review" id="review" class="text-black w-full h-44 p-4 text-lg"></textarea>
-
+                <br>
                 <div id="message"></div>
                 <button type="submit" class="btn-primary">Submit</button>
             </form>
@@ -255,6 +255,7 @@
                         rating_div + '</div></div><div class="my-2"><p>' + data['comment_content'] +
                         '</p></div><div class="flex flex-row"><button class="px-2 rounded-sm bg-gray-400"><i class="fa-solid fa-thumbs-up"></i></button><div class="like-label select-none">45</div></div></div></div>  </div>'
                     );
+                    $("#add-comment-form").remove();
                     console.log('Successful.');
                 },
                 error: function(data) {

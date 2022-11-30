@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use App\Models\Comment;
+use App\Models\Statistic;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -15,16 +16,22 @@ class AdminController extends Controller
 {
     private Client $client_model;
     private Comment $comment_model;
+    private Statistic $statistic_model;
     public function __construct()
     {
         $this->client_model = new Client();
         $this->comment_model = new Comment();
+        $this->statistic_model = new Statistic();
     }
 
     public function index()
     {
         if (Session::get('admin_id') != null) {
-            return view('admin.pages.home');
+            $data_views = $this->statistic_model->getDataViews();
+            $total_views = $this->statistic_model->getTotalViews();
+            $total_comments = $this->statistic_model->getTotalComments();
+            $total_clients = $this->statistic_model->getTotalClients();
+            return view('admin.pages.home', compact('total_clients','total_views','total_comments','data_views'));
         } else {
             return view('admin.login');
         }
